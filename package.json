@@ -5,6 +5,7 @@
   "repository": "git@github.com:Egorius1979/rss-node-task2.git",
   "author": "Egorius1979 <Egoriyvelikolepny1979@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
