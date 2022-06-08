@@ -1,0 +1,43 @@
+Arguments: 
+  /home/egor/.nvm/versions/node/v16.15.1/bin/node /home/egor/.yarn/bin/yarn.js set version stable
+
+PATH: 
+  /home/egor/.nvm/versions/node/v16.15.1/bin:/home/egor/.yarn/bin:/home/egor/.config/yarn/global/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  16.15.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: Release not found: stable
+      at /home/egor/.yarn/lib/cli.js:90297:17
+      at Generator.next (<anonymous>)
+      at step (/home/egor/.yarn/lib/cli.js:310:30)
+      at /home/egor/.yarn/lib/cli.js:321:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+
+npm manifest: 
+  {
+    "name": "rss-node-task2",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "git@github.com:Egorius1979/rss-node-task2.git",
+    "author": "Egorius1979 <Egoriyvelikolepny1979@gmail.com>",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index.js"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
