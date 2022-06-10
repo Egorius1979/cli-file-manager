@@ -1,11 +1,15 @@
-import { join, dirname, resolve } from 'path';
-import { readdir, access } from 'fs/promises';
-import { fileURLToPath } from 'url';
+import { resolve } from 'path';
+import { access } from 'fs/promises';
 
-export const cd = async (currentPath, pathToDir, excess) => {
+export const cd = async (currentPath, cb, pathToDir) => {
+  let fullInputArray = cb();
+  if (fullInputArray.length !== 2) return 'error';
+
+  if (currentPath.includes(pathToDir)) {
+    currentPath = '';
+  }
+
   try {
-    // if (excess) return 'error';
-
     const newPath = resolve(currentPath, pathToDir);
     await access(newPath);
     return newPath;

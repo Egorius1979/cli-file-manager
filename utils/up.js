@@ -1,11 +1,12 @@
-import { join } from 'path';
+import { resolve } from 'path';
 
-export const up = async (currentPath, excess) => {
+export const up = (currentPath, cb, excess) => {
+  if (excess) return 'error';
+
   try {
-    if (excess) return 'error';
-    const newPath = join(currentPath, '..');
+    const newPath = resolve(currentPath, '..');
     return newPath;
-  } catch {
+  } catch (error) {
     console.error('FS operation failed');
   }
 };
