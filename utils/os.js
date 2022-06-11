@@ -7,7 +7,13 @@ export const os = (currentPath, comArray) => {
 
   const statUtilsLabels = {
     '--EOL': () => console.log(JSON.stringify(EOL)),
-    '--cpus': () => console.log(cpus()),
+    '--cpus': () => {
+      const cpu = cpus().map(
+        (cpu, index) => `${index + 1}: ${cpu.model}, speed: ${cpu.speed}`
+      );
+      console.log('amount of CPUS: ', cpu.length);
+      console.log(cpu);
+    },
     '--homedir': () => console.log(userInfo().homedir),
     '--username': () => console.log(userInfo().username),
     '--architecture': () => console.log(arch()),
