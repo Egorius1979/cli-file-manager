@@ -1,12 +1,5 @@
 import { stdin, stdout, argv } from 'process';
-import { fileURLToPath } from 'url';
-import { dirname, join, parse, resolve } from 'path';
-// import { spawn } from 'child_process';
-// import { ls } from './utils/ls.js';
-// import { cd } from './utils/cd.js';
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
+import { getPath } from './utils/path/pathTransform.js';
 
 const commandList = [
   'up',
@@ -25,6 +18,7 @@ const commandList = [
 ];
 
 let currDir = process.env.HOME;
+// console.log(process);
 const idxOfUserName = argv[2].indexOf('=') + 1;
 const user = argv[2].slice(idxOfUserName);
 
@@ -33,58 +27,29 @@ console.log(`You are currently in ${currDir}\n`);
 
 try {
   stdin.on('data', async (data) => {
-    let commandFromCli = String(data).trim().split(' ');
-    // const userCommand = commandFromCli.split(' ')[0];
-    // const path = commandFromCli.slice(commandFromCli.indexOf(' ') + 1);
+    let commandFromCli = String(data).trim();
 
-    // const [path1, path2] = path.includes('"')
-    //   ? path.split(' "')
-    //   : path.split('');
-    // console.log('path1: ', path1, 'path2: ', path2);
-    // return;
-
-    // const [path1, path2] = path.includes('"')
-    // console.log('path1: ', path1, 'path2: ', path2);
-    // const array = path.includes('"') ? path.split('"') : path.split('');
-    // console.log(array);
-    // return;
-
-    const getFullArrayOnDemand = () => {
-      return commandFromCli.slice(commandFromCli.indexOf(' ') + 1);
-    };
-
-    // console.log(commandFromCli.indexOf(' '));
-
-    const [userCommand, path1, path2] = commandFromCli;
-
-    // const userCommand
-
-    if (userCommand === '.exit') {
-      exit();
+    if (commandFromCli.includes('"')) {
+      commandFromCli = getPath(commandFromCli);
+    } else {
+      commandFromCli = commandFromCli.split(' ');
     }
+
+    const [userCommand] = commandFromCli;
+    if (userCommand === '.exit') exit();
     if (commandList.find((fmСommand) => fmСommand === userCommand)) {
       const { [userCommand]: importedFunc } = await import(
         `./utils/${userCommand}.js`
       );
 
-      // console.log(path1, path2);
-
-      // return;
-
-      const newPath = await importedFunc(
-        currDir,
-        getFullArrayOnDemand,
-        path1,
-        path2
-      );
-      if (newPath === 'error') {
+      const runCommandGetPath = await importedFunc(currDir, commandFromCli);
+      if (runCommandGetPath === 'error') {
         setInvalidInput();
       } else {
-        currDir = newPath || currDir;
+        currDir = runCommandGetPath || currDir;
         console.log(`You are currently in ${currDir}\n`);
       }
     } else {
-      // console.log('Invalid input\n');
       setInvalidInput();
     }
   });

@@ -1,5 +1,5 @@
 import { cp } from './cp.js';
 
-export const mv = (currDir, cb, pathToFile, newDir) => {
-  cp(currDir, cb, pathToFile, newDir);
+export const mv = (currDir, comArray) => {
+  return cp(currDir, comArray);
 };

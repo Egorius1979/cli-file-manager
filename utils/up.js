@@ -1,12 +1,12 @@
 import { resolve } from 'path';
 
-export const up = (currentPath, cb, excess) => {
-  if (excess) return 'error';
+export const up = (currentPath, comArray) => {
+  if (comArray.length !== 1) return 'error';
 
   try {
     const newPath = resolve(currentPath, '..');
     return newPath;
-  } catch (error) {
+  } catch {
     console.error('FS operation failed');
   }
 };

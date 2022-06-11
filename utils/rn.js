@@ -1,14 +1,14 @@
 import { rename as fileRename } from 'fs/promises';
 import { dirname, resolve } from 'path';
 
-export const rn = async (currDir, cb, pathToFile, newFilename) => {
-  let fullInputArray = cb();
-  if (fullInputArray.length !== 3) return 'error';
+export const rn = async (currDir, comArray) => {
+  if (comArray.length !== 3) return 'error';
 
   try {
-    const fileToRename = resolve(currDir, pathToFile);
+    const fileToRename = resolve(currDir, comArray[1]);
     process.chdir(dirname(fileToRename));
-    await fileRename(fileToRename, newFilename);
+    await fileRename(fileToRename, comArray[2]);
+    console.log('Done!');
   } catch {
     console.error('FS operation failed');
   }

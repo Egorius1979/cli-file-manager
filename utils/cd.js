@@ -1,19 +1,20 @@
-import { resolve } from 'path';
+import { resolve, parse } from 'path';
 import { access } from 'fs/promises';
 
-export const cd = async (currentPath, cb, pathToDir) => {
-  let fullInputArray = cb();
-  if (fullInputArray.length !== 2) return 'error';
+export const cd = async (currentPath, comArray) => {
+  if (comArray.length !== 2) return 'error';
 
-  if (currentPath.includes(pathToDir)) {
+  if (currentPath.startsWith(comArray[1])) {
     currentPath = '';
   }
 
   try {
-    const newPath = resolve(currentPath, pathToDir);
+    const newPath = resolve(currentPath, comArray[1]);
+    if (parse(newPath).ext) throw Error;
     await access(newPath);
     return newPath;
-  } catch {
+  } catch (e) {
+    console.error(e);
     console.error('FS operation failed');
   }
 };

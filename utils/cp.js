@@ -1,21 +1,37 @@
-import { copyFile } from 'fs/promises';
 import { resolve, parse } from 'path';
 import { rm } from 'fs/promises';
+import { createReadStream, createWriteStream } from 'fs';
+import { access } from 'fs/promises';
+import { pipeline } from 'stream';
 
-export const cp = async (currDir, cb, pathToFile, newDir) => {
-  let fullInputArray = cb();
-  if (fullInputArray.length !== 3) return 'error';
+export const cp = async (currDir, comArray) => {
+  if (comArray.length !== 3) return 'error';
 
   try {
-    const filename = parse(pathToFile).base;
-    const fileToCopy = resolve(currDir, pathToFile);
-    const newFilePath = resolve(currDir, newDir, filename);
+    const filename = parse(comArray[1]).base;
+    const fileToCopy = resolve(currDir, comArray[1]);
+    const newFilePath = resolve(currDir, comArray[2], filename);
 
-    await copyFile(fileToCopy, newFilePath);
+    await access(fileToCopy);
 
-    if (fullInputArray[0] === 'mv') {
-      await rm(fileToCopy);
-    }
+    const readStrm = createReadStream(fileToCopy);
+    const writeStrm = createWriteStream(newFilePath);
+
+    return new Promise((resolve) => {
+      pipeline(readStrm, writeStrm, (e) => {
+        if (e) {
+          console.log(e);
+          console.error('FS operation failed');
+          resolve();
+        } else {
+          if (comArray[0] === 'mv') {
+            rm(fileToCopy);
+          }
+          console.log('Done!');
+          resolve();
+        }
+      });
+    });
   } catch {
     console.error('FS operation failed');
   }
