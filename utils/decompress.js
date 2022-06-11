@@ -16,7 +16,6 @@ export const decompress = async (currDir, pathArr) => {
     );
 
     await access(bpFilePath);
-    process.chdir(dirname(bpFilePath));
 
     const readStrm = createReadStream(bpFilePath);
     const writeStrm = createWriteStream(unZipFilePath);

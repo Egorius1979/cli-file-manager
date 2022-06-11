@@ -1,4 +1,4 @@
-import { stdin, stdout, argv } from 'process';
+import { stdin, argv } from 'process';
 import { getPath } from './utils/path/pathTransform.js';
 
 const commandList = [
@@ -17,8 +17,8 @@ const commandList = [
   'decompress',
 ];
 
-let currDir = process.env.HOME;
-// console.log(process);
+let currDir =
+  process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
 const idxOfUserName = argv[2].indexOf('=') + 1;
 const user = argv[2].slice(idxOfUserName);
 

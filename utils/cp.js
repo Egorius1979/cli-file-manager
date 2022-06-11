@@ -20,7 +20,6 @@ export const cp = async (currDir, comArray) => {
     return new Promise((resolve) => {
       pipeline(readStrm, writeStrm, (e) => {
         if (e) {
-          console.log(e);
           console.error('FS operation failed');
           resolve();
         } else {

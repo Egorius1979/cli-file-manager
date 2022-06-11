@@ -13,8 +13,7 @@ export const cd = async (currentPath, comArray) => {
     if (parse(newPath).ext) throw Error;
     await access(newPath);
     return newPath;
-  } catch (e) {
-    console.error(e);
+  } catch {
     console.error('FS operation failed');
   }
 };

@@ -16,7 +16,6 @@ export const compress = async (currDir, pathArr) => {
     );
 
     await access(filePath);
-    process.chdir(dirname(filePath));
 
     const readStrm = createReadStream(filePath);
     const writeStrm = createWriteStream(brFilePath);
@@ -25,7 +24,6 @@ export const compress = async (currDir, pathArr) => {
     return new Promise((resolve) => {
       pipeline(readStrm, br, writeStrm, (e) => {
         if (e) {
-          console.log(e);
           console.error('FS operation failed');
           resolve();
         } else {

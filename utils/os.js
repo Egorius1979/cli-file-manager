@@ -9,9 +9,10 @@ export const os = (currentPath, comArray) => {
     '--EOL': () => console.log(JSON.stringify(EOL)),
     '--cpus': () => {
       const cpu = cpus().map(
-        (cpu, index) => `${index + 1}: ${cpu.model}, speed: ${cpu.speed}`
+        (cpu, index) =>
+          `${index + 1}: ${cpu.model}, speed: ${cpu.speed / 1000} GHz`
       );
-      console.log('amount of CPUS: ', cpu.length);
+      console.log('amount of CPUs: ', cpu.length);
       console.log(cpu);
     },
     '--homedir': () => console.log(userInfo().homedir),
