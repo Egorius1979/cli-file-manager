@@ -10,7 +10,9 @@ export const os = (currentPath, comArray) => {
     '--cpus': () => {
       const cpu = cpus().map(
         (cpu, index) =>
-          `${index + 1}: ${cpu.model}, speed: ${cpu.speed / 1000} GHz`
+          `${index + 1}: ${cpu.model}, speed: ${
+            cpu.speed > 100 ? cpu.speed / 1000 : cpu.speed / 10
+          } GHz`
       );
       console.log('amount of CPUs: ', cpu.length);
       console.log(cpu);
@@ -22,7 +24,8 @@ export const os = (currentPath, comArray) => {
 
   try {
     statUtilsLabels[flag]();
-  } catch {
+  } catch (e) {
+    console.error(e);
     console.error('FS operation failed');
   }
 };
