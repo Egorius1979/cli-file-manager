@@ -24,8 +24,7 @@ export const os = (currentPath, comArray) => {
 
   try {
     statUtilsLabels[flag]();
-  } catch (e) {
-    console.error(e);
+  } catch {
     console.error('FS operation failed');
   }
 };
