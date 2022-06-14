@@ -1,5 +1,9 @@
 # File Manager
 
+## Start
+
+`npm run start -- --username=your_username` - for example _npm run start -- --username=Vasya_
+
 ## Commands
 
 - `up` - go upper from current directory;
