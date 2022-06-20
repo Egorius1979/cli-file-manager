@@ -4,6 +4,8 @@
 
 `npm run start -- --username=your_username` - for example _npm run start -- --username=Vasya_
 
+**Node 16 LTS** is required to run
+
 ## Commands
 
 - `up` - go upper from current directory;
