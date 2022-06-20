@@ -2,9 +2,9 @@
 
 ## Start
 
-`npm run start -- --username=your_username` - for example _npm run start -- --username=Vasya_
+`npm run start -- --username=your_username` - for example _**npm run start -- --username=Vasya**_
 
-**Node 16 LTS** is required to run
+Use 16 LTS version of **Node.js**
 
 ## Commands
 
