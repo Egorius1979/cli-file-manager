@@ -1,5 +1,6 @@
 import { rm as remove } from 'fs/promises';
 import { resolve } from 'path';
+import { error } from '../index.js';
 
 export const rm = async (currDir, comArray) => {
   if (comArray.length !== 2) return 'error';
@@ -9,6 +10,6 @@ export const rm = async (currDir, comArray) => {
     await remove(fileToDelete);
     console.log('Done!');
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

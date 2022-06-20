@@ -1,5 +1,6 @@
 import { rename as fileRename } from 'fs/promises';
 import { dirname, resolve } from 'path';
+import { error } from '../index.js';
 
 export const rn = async (currDir, comArray) => {
   if (comArray.length !== 3) return 'error';
@@ -10,6 +11,6 @@ export const rn = async (currDir, comArray) => {
     await fileRename(fileToRename, comArray[2]);
     console.log('Done!');
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

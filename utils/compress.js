@@ -1,8 +1,9 @@
 import { createReadStream, createWriteStream } from 'fs';
-import { dirname, resolve, parse } from 'path';
+import { resolve, parse } from 'path';
 import { createBrotliCompress } from 'zlib';
 import { pipeline } from 'stream';
 import { access } from 'fs/promises';
+import { error } from '../index.js';
 
 export const compress = async (currDir, pathArr) => {
   if (pathArr.length !== 3) return 'error';
@@ -24,7 +25,7 @@ export const compress = async (currDir, pathArr) => {
     return new Promise((resolve) => {
       pipeline(readStrm, br, writeStrm, (e) => {
         if (e) {
-          console.error('FS operation failed');
+          console.error(error);
           resolve();
         } else {
           console.log('Done!');
@@ -33,6 +34,6 @@ export const compress = async (currDir, pathArr) => {
       });
     });
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

@@ -1,5 +1,6 @@
 import { resolve, parse } from 'path';
 import { access } from 'fs/promises';
+import { error } from '../index.js';
 
 export const cd = async (currentPath, comArray) => {
   if (comArray.length !== 2) return 'error';
@@ -14,6 +15,6 @@ export const cd = async (currentPath, comArray) => {
     await access(newPath);
     return newPath;
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

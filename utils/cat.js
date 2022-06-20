@@ -1,6 +1,7 @@
 import { createReadStream } from 'fs';
 import { resolve, parse } from 'path';
 import { access } from 'fs/promises';
+import { error } from '../index.js';
 
 export const cat = async (currentPath, comArray) => {
   if (comArray.length !== 2) return 'error';
@@ -23,11 +24,11 @@ export const cat = async (currentPath, comArray) => {
         }
       });
       fileStream.on('error', () => {
-        console.error('FS operation failed');
+        console.error(error);
         resolve();
       });
     });
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

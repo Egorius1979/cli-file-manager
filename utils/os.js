@@ -1,4 +1,5 @@
 import { EOL, cpus, userInfo, arch } from 'os';
+import { error } from '../index.js';
 
 export const os = (currentPath, comArray) => {
   if (comArray.length !== 2) return 'error';
@@ -26,9 +27,9 @@ export const os = (currentPath, comArray) => {
       case '--architecture':
         () => console.log(arch());
       default:
-        console.error('FS operation failed');
+        console.error(error);
     }
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

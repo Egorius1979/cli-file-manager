@@ -3,6 +3,7 @@ import { rm } from 'fs/promises';
 import { createReadStream, createWriteStream } from 'fs';
 import { access } from 'fs/promises';
 import { pipeline } from 'stream';
+import { error } from '../index.js';
 
 export const cp = async (currDir, comArray) => {
   if (comArray.length !== 3) return 'error';
@@ -20,7 +21,7 @@ export const cp = async (currDir, comArray) => {
     return new Promise((resolve) => {
       pipeline(readStrm, writeStrm, (e) => {
         if (e) {
-          console.error('FS operation failed');
+          console.error(error);
           resolve();
         } else {
           if (comArray[0] === 'mv') {
@@ -32,6 +33,6 @@ export const cp = async (currDir, comArray) => {
       });
     });
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

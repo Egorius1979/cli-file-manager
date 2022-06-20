@@ -2,6 +2,7 @@ import { createHash } from 'crypto';
 import { resolve } from 'path';
 import { createReadStream } from 'fs';
 import { access } from 'fs/promises';
+import { error } from '../index.js';
 
 export const hash = async (currDir, comArray) => {
   if (comArray.length !== 2) return 'error';
@@ -23,11 +24,11 @@ export const hash = async (currDir, comArray) => {
         }
       });
       fileToHash.on('error', () => {
-        console.error('FS operation failed');
+        console.error(error);
         resolve();
       });
     });
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

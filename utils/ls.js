@@ -1,4 +1,5 @@
 import { readdir } from 'fs/promises';
+import { error } from '../index.js';
 
 export const ls = async (currentPath, comArray) => {
   if (comArray.length !== 1) return 'error';
@@ -7,6 +8,6 @@ export const ls = async (currentPath, comArray) => {
     const filesArray = await readdir(currentPath);
     console.log(filesArray);
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };

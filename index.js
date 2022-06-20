@@ -67,3 +67,5 @@ function exit() {
   console.log(`\rThank you for using File Manager, ${user}!`);
   process.exit();
 }
+
+export const error = 'FS operation failed';

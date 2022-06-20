@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
+import { error } from '../index.js';
 
 export const add = async (currDir, comArray) => {
   if (comArray.length !== 2) return 'error';
@@ -9,6 +10,6 @@ export const add = async (currDir, comArray) => {
     await writeFile(newFileName, '', { flag: 'ax' });
     console.log('Done!');
   } catch {
-    console.error('FS operation failed');
+    console.error(error);
   }
 };
