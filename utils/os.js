@@ -5,23 +5,27 @@ export const os = (currentPath, comArray) => {
 
   const flag = comArray[1];
 
-  const statUtilsLabels = {
-    '--EOL': () => console.log(JSON.stringify(EOL)),
-    '--cpus': () => {
-      const cpu = cpus().map(
-        (cpu, index) =>
-          `${index + 1}: ${cpu.model}, speed: ${cpu.speed / 1000} GHz`
-      );
-      console.log('amount of CPUs: ', cpu.length);
-      console.log(cpu);
-    },
-    '--homedir': () => console.log(userInfo().homedir),
-    '--username': () => console.log(userInfo().username),
-    '--architecture': () => console.log(arch()),
-  };
-
   try {
-    statUtilsLabels[flag]();
+    switch (flag) {
+      case '--EOL':
+        console.log(JSON.stringify(EOL));
+        break;
+      case '--cpus':
+        const cpu = cpus().map(
+          (cpu, index) =>
+            `${index + 1}: ${cpu.model}, speed: ${cpu.speed / 1000} GHz`
+        );
+        console.log(cpu);
+        break;
+      case '--homedir':
+        () => console.log(userInfo().homedir);
+        break;
+      case '--username':
+        () => console.log(userInfo().username);
+        break;
+      case '--architecture':
+        () => console.log(arch());
+    }
   } catch {
     console.error('FS operation failed');
   }
