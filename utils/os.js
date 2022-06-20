@@ -25,6 +25,8 @@ export const os = (currentPath, comArray) => {
         break;
       case '--architecture':
         () => console.log(arch());
+      default:
+        console.error('FS operation failed');
     }
   } catch {
     console.error('FS operation failed');
